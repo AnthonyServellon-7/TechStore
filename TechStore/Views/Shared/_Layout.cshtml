@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TechStore.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -40,13 +40,16 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+
+    <!-- flex-grow-1 obliga a este contenedor a expandirse y empujar el footer -->
+    <div class="container flex-grow-1">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted mt-5 bg-light">
+    <!-- mt-auto asegura que el margen superior empuje el footer al final -->
+    <footer class="border-top footer text-muted mt-auto bg-light">
         <div class="container text-center py-3">
             &copy; 2026 - TechStore
         </div>
