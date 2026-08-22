@@ -1,8 +1,122 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@{
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="hero-flex-container">
+    <div class="hero-content-flex">
+        <h1 class="display-4 fw-bold text-white">TechStore</h1>
+        <p class="lead text-white-50">Tu portal tecnológico de confianza. Descubre el hardware de alto rendimiento, laptops y smartphones más modernos del mercado.</p>
+        <a asp-controller="Productos" asp-action="Index" class="btn btn-outline-light btn-lg mt-2 px-4">Ver Catálogo</a>
+    </div>
+    <div class="hero-image-flex">
+        <img src="~/images/laptop.jpg" alt="Laptop Gamer Destacada" />
+    </div>
+</div>
+
+<div class="container mt-5">
+    <h2 class="text-center font-weight-bold mb-4" style="color: var(--primary-color);">Accesos Rápidos</h2>
+    <div class="quick-access-flex-container">
+        <div class="quick-access-card">
+            <div>
+                <h3>Productos <span class="badge bg-secondary fs-6">Catálogo</span></h3>
+                <p class="text-muted small">Explora nuestra colección completa de laptops gamer, celulares de última generación y periféricos de gama alta.</p>
+            </div>
+            <a asp-controller="Productos" asp-action="Index" class="btn text-white w-100" style="background-color: var(--secondary-color);">Ver Productos</a>
+        </div>
+        
+        <div class="quick-access-card">
+            <div>
+                <h3>Categorías <span class="badge bg-secondary fs-6">Clasificación</span></h3>
+                <p class="text-muted small">Navega fácilmente a través de nuestras diferentes categorías de productos organizadas para ti.</p>
+            </div>
+            <a asp-controller="Categorias" asp-action="Index" class="btn text-white w-100" style="background-color: var(--secondary-color);">Ver Categorías</a>
+        </div>
+
+        <div class="quick-access-card">
+            <div>
+                <h3>Soporte <span class="badge bg-secondary fs-6">Contacto</span></h3>
+                <p class="text-muted small">¿Tienes alguna duda técnica o consulta sobre tu pedido? Nuestro equipo especializado está listo para ayudarte.</p>
+            </div>
+            <a asp-controller="Contacto" asp-action="Index" class="btn text-white w-100" style="background-color: var(--secondary-color);">Contáctenos</a>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <h2 class="text-center font-weight-bold mb-4" style="color: var(--primary-color);">Productos Destacados</h2>
+    
+    <div class="grid-container">
+        <div class="tech-card h-100 d-flex flex-column">
+            <img src="~/images/laptop.jpg" class="card-img-top rounded mb-3" alt="Laptop Gamer" style="height: 180px; object-fit: cover;">
+            <div class="card-body d-flex flex-column p-0">
+                <span class="badge bg-secondary mb-2 align-self-start">Laptops</span>
+                <h5 class="card-title font-weight-bold" style="color: var(--primary-color);">Laptop Gamer</h5>
+                <p class="card-text text-muted small product-description flex-grow-1">Procesador de alto rendimiento. Ideal para disfrutar videojuegos con gráficos fluidos.</p>
+                <div class="mt-auto">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="fw-bold text-dark fs-5">$1199.00</span>
+                        <span class="small text-muted">Stock: 10</span>
+                    </div>
+                    <span class="badge bg-success w-100 py-2">Disponible</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-card h-100 d-flex flex-column">
+            <img src="~/images/celular.jpg" class="card-img-top rounded mb-3" alt="iPhone 14 Pro" style="height: 180px; object-fit: cover;">
+            <div class="card-body d-flex flex-column p-0">
+                <span class="badge bg-secondary mb-2 align-self-start">Celulares</span>
+                <h5 class="card-title font-weight-bold" style="color: var(--primary-color);">iPhone 14 Pro</h5>
+                <p class="card-text text-muted small product-description flex-grow-1">Pantalla Super Retina XDR con Dynamic Island y cámara de 48 MP.</p>
+                <div class="mt-auto">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="fw-bold text-dark fs-5">$899.00</span>
+                        <span class="small text-muted">Stock: 15</span>
+                    </div>
+                    <span class="badge bg-success w-100 py-2">Disponible</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-card h-100 d-flex flex-column">
+            <img src="~/images/teclado.jpg" class="card-img-top rounded mb-3" alt="Teclado Mecánico Gamer" style="height: 180px; object-fit: cover;">
+            <div class="card-body d-flex flex-column p-0">
+                <span class="badge bg-secondary mb-2 align-self-start">Accesorios</span>
+                <h5 class="card-title font-weight-bold" style="color: var(--primary-color);">Teclado Mecánico Gamer</h5>
+                <p class="card-text text-muted small product-description flex-grow-1">Switches mecánicos e iluminación RGB personalizable.</p>
+                <div class="mt-auto">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="fw-bold text-dark fs-5">$49.99</span>
+                        <span class="small text-muted">Stock: 25</span>
+                    </div>
+                    <span class="badge bg-success w-100 py-2">Disponible</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 py-4">
+    <div class="stats-flex-container">
+        <div class="stat-card-item">
+            <div class="stat-number">1,000+</div>
+            <p class="stat-label">Clientes Satisfechos</p>
+        </div>
+        <div class="stat-card-item">
+            <div class="stat-number">50+</div>
+            <p class="stat-label">Marcas Premium</p>
+        </div>
+        <div class="stat-card-item">
+            <div class="stat-number">24/7</div>
+            <p class="stat-label">Soporte Técnico</p>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4 mb-5">
+    <div class="text-white rounded-3 p-5 text-center shadow" style="background-color: var(--primary-color);">
+        <h2 class="fw-bold">Explora la experiencia TechStore</h2>
+        <p class="lead mb-4 text-white-50">Conoce los valores, misión y visión que nos impulsan a ofrecerte el mejor servicio todos los días.</p>
+        <a asp-controller="Home" asp-action="AcercaDe" class="btn btn-outline-light btn-lg px-4">Conocer Más sobre Nosotros</a>
+    </div>
 </div>
