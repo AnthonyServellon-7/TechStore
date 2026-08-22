@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Contáctenos";
+}
+
+<div class="flex-center-col">
+    <h1>Contáctenos</h1>
+    <p>¿Tienes dudas sobre nuestros productos? Escríbenos y con gusto te ayudamos.</p>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-7">
+        <form>
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre completo</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre">
+            </div>
+            <div class="mb-3">
+                <label for="correo" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="correo" placeholder="ejemplo@correo.com">
+            </div>
+            <div class="mb-3">
+                <label for="asunto" class="form-label">Asunto</label>
+                <input type="text" class="form-control" id="asunto" placeholder="Motivo de tu mensaje">
+            </div>
+            <div class="mb-3">
+                <label for="mensaje" class="form-label">Mensaje</label>
+                <textarea class="form-control" id="mensaje" rows="4" placeholder="Escribe tu mensaje aquí"></textarea>
+            </div>
+            <button type="button" class="btn btn-dark">Enviar mensaje</button>
+        </form>
+    </div>
+
+    <div class="col-md-5">
+        <div class="tech-card">
+            <h4>Información de contacto</h4>
+            <p><strong>Dirección:</strong> Av. Las palmeras, Antiguo Cuscatlán</p>
+            <p><strong>Teléfono:</strong> +503 2222-3333</p>
+            <p><strong>Correo:</strong> contacto@techstore.com</p>
+            <p><strong>Horario:</strong> Lunes a Viernes, 8:00 am - 5:00 pm</p>
+        </div>
+    </div>
+</div>
