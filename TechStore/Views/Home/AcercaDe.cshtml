@@ -1,0 +1,78 @@
+@{
+    ViewData["Title"] = "Acerca de Nosotros";
+}
+
+<header class="p-5 mb-5 rounded-3 text-white text-center shadow-sm" style="background-color: var(--primary-color);">
+    <div class="container-fluid py-2">
+        <h1 class="display-4 fw-bold">Sobre TechStore</h1>
+        <p class="col-md-8 mx-auto fs-5 mb-0">Llevando la innovación tecnológica a tu alcance con el catálogo de hardware, laptops y smartphones más completo del mercado.</p>
+    </div>
+</header>
+
+<div class="container">
+    <section class="row align-items-stretch mb-5">
+        <article class="col-lg-6 mb-4 mb-lg-0">
+            <div class="h-100 p-4 border rounded-3 bg-white shadow-sm">
+                <h2 class="h3 font-weight-bold mb-3" style="color: var(--primary-color);">Nuestra Historia</h2>
+                <p class="text-muted">
+                    TechStore nació en el año 2020 con una idea simple: conectar a los entusiastas de la tecnología, profesionales del desarrollo y creadores de contenido con los mejores componentes de hardware a nivel mundial.
+                </p>
+                <p class="text-muted mb-0">
+                    Comenzamos como una pequeña tienda de distribución local de partes de computadoras y periféricos. Hoy en día, gracias a la confianza y apoyo de nuestros clientes, nos hemos expandido para ofrecer un catálogo completo que incluye laptops de última generación, smartphones gama alta y accesorios premium de manera 100% digital, garantizando envíos seguros y soporte experto de primer nivel.
+                </p>
+            </div>
+        </article>
+
+        <div class="col-lg-6 d-flex flex-column gap-4">
+            <aside class="p-4 text-white rounded-3 shadow-sm flex-grow-1" style="background-color: var(--secondary-color);">
+                <h2 class="h4 font-weight-bold mb-2">Nuestra Misión</h2>
+                <p class="mb-0 text-white-50">
+                    Proporcionar a nuestros clientes acceso a la mejor tecnología e innovación, ofreciendo productos de alta calidad y un soporte especializado para optimizar su productividad, aprendizaje y entretenimiento.
+                </p>
+            </aside>
+
+            <aside class="p-4 border rounded-3 bg-white shadow-sm flex-grow-1" style="border: 1px solid var(--accent-color);">
+                <h2 class="h4 font-weight-bold mb-2" style="color: var(--primary-color);">Nuestra Visión</h2>
+                <p class="mb-0 text-muted">
+                    Ser la plataforma de comercio electrónico tecnológico líder de la región, destacando por nuestro catálogo siempre actualizado, rapidez en envíos y una experiencia de cliente sobresaliente.
+                </p>
+            </aside>
+        </div>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="text-center font-weight-bold mb-4" style="color: var(--primary-color);">Nuestros Valores Core</h2>
+        
+        <div class="grid-container">
+            @await Html.PartialAsync("_ValorCard", new TechStore.Models.ValorCard
+            {
+                Titulo = "Innovación",
+                Descripcion = "Buscamos constantemente las últimas tendencias and dispositivos del ecosistema tecnológico global."
+            })
+            @await Html.PartialAsync("_ValorCard", new TechStore.Models.ValorCard
+            {
+                Titulo = "Calidad",
+                Descripcion = "Todos nuestros productos cuentan con certificación oficial y garantía de fábrica para tu tranquilidad."
+            })
+            @await Html.PartialAsync("_ValorCard", new TechStore.Models.ValorCard
+            {
+                Titulo = "Integridad",
+                Descripcion = "Actuamos con transparencia y honestidad en cada venta, envío y soporte postventa realizado."
+            })
+            @await Html.PartialAsync("_ValorCard", new TechStore.Models.ValorCard
+            {
+                Titulo = "Orientación al Cliente",
+                Descripcion = "Tu satisfacción es nuestra máxima prioridad. Te acompañamos antes, durante y después de tu compra."
+            })
+        </div>
+    </section>
+
+    <section class="team-section mt-5 mb-5 text-center">
+        <figure class="figure w-100">
+            <img src="https://picsum.photos/900/350?random=20" class="figure-img img-fluid rounded shadow-sm" alt="TechStore E-commerce" style="max-height: 350px; width: 100%; object-fit: cover;" />
+            <figcaption class="figure-caption text-center mt-3" style="font-style: italic; color: var(--secondary-color);">
+                Plataforma de comercio electrónico de TechStore desarrollada con ASP.NET Core MVC.
+            </figcaption>
+        </figure>
+    </section>
+</div>
