@@ -1,0 +1,20 @@
+﻿@model IEnumerable<TechStore.Models.Producto>
+
+@{
+    ViewData["Title"] = "Productos";
+}
+
+<div class="container my-4">
+    <div class="text-center mb-4">
+        <h1 class="display-5 fw-bold text-primary">Catálogo de Productos</h1>
+        <p class="lead text-muted">Explora los últimos dispositivos y accesorios tecnológicos</p>
+    </div>
+
+   
+    <div class="grid-container">
+        @foreach (var producto in Model)
+        {
+            @await Html.PartialAsync("_ProductCard", producto)
+        }
+    </div>
+</div>
