@@ -1,0 +1,21 @@
+﻿@model List<TechStore.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Categorías";
+}
+
+<div class="flex-center-col">
+    <h1>Nuestras Categorías</h1>
+    <p>Explora los productos tecnológicos organizados por categoría.</p>
+</div>
+
+<div class="grid-container">
+    @foreach (var categoria in Model)
+    {
+        <div class="tech-card">
+            <img src="@categoria.ImagenUrl" alt="@categoria.Nombre" class="img-fluid rounded mb-2" style="height:160px; object-fit:cover; width:100%;">
+            <h3>@categoria.Nombre</h3>
+            <p>@categoria.Descripcion</p>
+        </div>
+    }
+</div>
