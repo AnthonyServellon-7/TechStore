@@ -1,11 +1,23 @@
-﻿@model TechStore.Models.Producto
+@model TechStore.Models.Producto
+
+@{
+    var mostrarAcciones = ViewData["MostrarAcciones"] as bool? ?? false;
+}
 
 <div class="tech-card h-100 d-flex flex-column">
-    <img src="@Url.Content(Model.Imagen)" class="card-img-top" alt="@Model.Nombre">
-    <div class="card-body d-flex flex-column">
-        <span class="badge bg-secondary mb-2 align-self-start">@Model.Categoria</span>
+    @if (!string.IsNullOrWhiteSpace(Model.Imagen))
+    {
+        <img src="@Url.Content(Model.Imagen)" class="card-img-top" alt="@Model.Nombre" style="height:200px; object-fit:cover;">
+    }
+    else
+    {
+        <div class="bg-light d-flex align-items-center justify-content-center text-muted" style="height:200px;">Sin imagen</div>
+    }
+
+    <div class="card-body d-flex flex-column px-0 pb-0">
+        <span class="badge bg-secondary mb-2 align-self-start">@(Model.Categoria?.Nombre ?? "Sin categoría")</span>
         <h5 class="card-title">@Model.Nombre</h5>
-        
+
         <p class="card-text text-muted product-description">@Model.Descripcion</p>
 
         <div class="mt-auto">
@@ -21,6 +33,14 @@
             else
             {
                 <span class="badge bg-danger w-100 py-2">Agotado</span>
+            }
+
+            @if (mostrarAcciones)
+            {
+                <div class="d-flex gap-2 mt-3">
+                    <a asp-controller="Productos" asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-outline-primary btn-sm flex-fill">Editar</a>
+                    <a asp-controller="Productos" asp-action="Delete" asp-route-id="@Model.ID" class="btn btn-outline-danger btn-sm flex-fill">Eliminar</a>
+                </div>
             }
         </div>
     </div>

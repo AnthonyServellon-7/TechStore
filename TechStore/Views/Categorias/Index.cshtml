@@ -1,4 +1,4 @@
-﻿@model List<TechStore.Models.Categoria>
+@model List<TechStore.Models.Categoria>
 
 @{
     ViewData["Title"] = "Categorías";
@@ -16,6 +16,7 @@
             <img src="@categoria.ImagenUrl" alt="@categoria.Nombre" class="img-fluid rounded mb-2" style="height:160px; object-fit:cover; width:100%;">
             <h3>@categoria.Nombre</h3>
             <p>@categoria.Descripcion</p>
+            <span class="badge bg-primary">@categoria.Productos.Count producto(s)</span>
         </div>
     }
 </div>

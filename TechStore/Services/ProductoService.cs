@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TechStore.Data;
 using TechStore.Models;
 
@@ -17,6 +17,7 @@ namespace TechStore.Services
         {
             return await _context.Productos
                 .Include(p => p.Categoria)
+                .OrderBy(p => p.ID)
                 .ToListAsync();
         }
 
@@ -29,25 +30,48 @@ namespace TechStore.Services
 
         public async Task AgregarAsync(Producto producto)
         {
+            NormalizarTextos(producto);
+
             _context.Productos.Add(producto);
             await _context.SaveChangesAsync();
         }
 
-        public async Task EditarAsync(Producto producto)
+        public async Task<bool> EditarAsync(Producto producto)
         {
+            var existe = await _context.Productos.AnyAsync(p => p.ID == producto.ID);
+
+            if (!existe)
+            {
+                return false;
+            }
+
+            NormalizarTextos(producto);
+
             _context.Productos.Update(producto);
             await _context.SaveChangesAsync();
+            return true;
         }
 
-        public async Task EliminarAsync(int id)
+        public async Task<bool> EliminarAsync(int id)
         {
             var producto = await _context.Productos.FindAsync(id);
 
-            if (producto != null)
+            if (producto == null)
             {
-                _context.Productos.Remove(producto);
-                await _context.SaveChangesAsync();
+                return false;
             }
+
+            _context.Productos.Remove(producto);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        // Los campos de texto opcionales llegan como null desde el formulario;
+        // las columnas de la base de datos no aceptan nulos.
+        private static void NormalizarTextos(Producto producto)
+        {
+            producto.Descripcion ??= string.Empty;
+            producto.Imagen ??= string.Empty;
         }
     }
 }

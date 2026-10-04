@@ -19,6 +19,7 @@ namespace TechStore.Models
         public decimal Precio { get; set; }
 
         [Required(ErrorMessage = "La categoría es obligatoria")]
+        [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar una categoría")]
         public int CategoriaId { get; set; }
 
         [ForeignKey("CategoriaId")]
