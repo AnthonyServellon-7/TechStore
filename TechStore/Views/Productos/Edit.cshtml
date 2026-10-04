@@ -1,0 +1,24 @@
+@model TechStore.Models.Producto
+
+@{
+    ViewData["Title"] = "Editar Producto";
+}
+
+<div class="card mx-auto my-4" style="max-width: 700px;">
+    <div class="card-body">
+        <h1 class="h3 mb-3">Editar producto</h1>
+
+        <form asp-action="Edit" asp-route-id="@Model.ID" method="post">
+            <input type="hidden" asp-for="ID" />
+
+            <partial name="_ProductoForm" model="Model" />
+
+            <button type="submit" class="btn btn-success">Guardar cambios</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

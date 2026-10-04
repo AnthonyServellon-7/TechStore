@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using TechStore.Data;
 using TechStore.Models;
 using TechStore.Services;
 
@@ -9,15 +7,17 @@ namespace TechStore.Controllers
 {
     public class ProductosController : Controller
     {
+        // El controlador depende de abstracciones (interfaces), no de implementaciones
+        // ni del DbContext: el contenedor de dependencias entrega las instancias.
         private readonly IProductoService _productoService;
-        private readonly TechStoreDbContext _context;
+        private readonly ICategoriaService _categoriaService;
 
         public ProductosController(
             IProductoService productoService,
-            TechStoreDbContext context)
+            ICategoriaService categoriaService)
         {
             _productoService = productoService;
-            _context = context;
+            _categoriaService = categoriaService;
         }
 
         public async Task<IActionResult> Index()
@@ -28,31 +28,24 @@ namespace TechStore.Controllers
 
         public async Task<IActionResult> Create()
         {
-            ViewBag.Categorias = new SelectList(
-                await _context.Categorias.ToListAsync(),
-                "Id",
-                "Nombre");
-
-            return View();
+            await CargarCategoriasAsync();
+            return View(new Producto { Estado = true });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Producto producto)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                await _productoService.AgregarAsync(producto);
-                return RedirectToAction(nameof(Index));
+                await CargarCategoriasAsync(producto.CategoriaId);
+                return View(producto);
             }
 
-            ViewBag.Categorias = new SelectList(
-                await _context.Categorias.ToListAsync(),
-                "Id",
-                "Nombre",
-                producto.CategoriaId);
+            await _productoService.AgregarAsync(producto);
 
-            return View(producto);
+            TempData["SuccessMessage"] = "Producto agregado correctamente.";
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Edit(int id)
@@ -64,12 +57,7 @@ namespace TechStore.Controllers
                 return NotFound();
             }
 
-            ViewBag.Categorias = new SelectList(
-                await _context.Categorias.ToListAsync(),
-                "Id",
-                "Nombre",
-                producto.CategoriaId);
-
+            await CargarCategoriasAsync(producto.CategoriaId);
             return View(producto);
         }
 
@@ -82,19 +70,21 @@ namespace TechStore.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                await _productoService.EditarAsync(producto);
-                return RedirectToAction(nameof(Index));
+                await CargarCategoriasAsync(producto.CategoriaId);
+                return View(producto);
             }
 
-            ViewBag.Categorias = new SelectList(
-                await _context.Categorias.ToListAsync(),
-                "Id",
-                "Nombre",
-                producto.CategoriaId);
+            var actualizado = await _productoService.EditarAsync(producto);
 
-            return View(producto);
+            if (!actualizado)
+            {
+                return NotFound();
+            }
+
+            TempData["SuccessMessage"] = "Producto actualizado correctamente.";
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Delete(int id)
@@ -113,8 +103,26 @@ namespace TechStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _productoService.EliminarAsync(id);
+            var eliminado = await _productoService.EliminarAsync(id);
+
+            if (!eliminado)
+            {
+                return NotFound();
+            }
+
+            TempData["SuccessMessage"] = "Producto eliminado correctamente.";
             return RedirectToAction(nameof(Index));
+        }
+
+        private async Task CargarCategoriasAsync(int? categoriaSeleccionada = null)
+        {
+            var categorias = await _categoriaService.ObtenerTodasAsync();
+
+            ViewBag.Categorias = new SelectList(
+                categorias,
+                nameof(Categoria.Id),
+                nameof(Categoria.Nombre),
+                categoriaSeleccionada);
         }
     }
 }
